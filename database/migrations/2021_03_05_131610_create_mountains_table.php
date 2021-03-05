@@ -16,6 +16,7 @@ class CreateMountainsTable extends Migration
         Schema::create('mountains', function (Blueprint $table) {
             $table->id();
             $table->string('mountain_name', 20);
+            $table->int('elevation');
             $table->timestamps();
         });
     }
