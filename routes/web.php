@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -12,7 +13,9 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+// 仮index
+Route::get('/', 'IndexController@index');
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// 詳細画面(show)
+Route::get('/show', 'ShowController@show');
+Route::post('/show', 'ShowController@store');
