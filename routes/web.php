@@ -13,9 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('test');
-});
+
+
+
+
 
 
 //投稿画面と処理のルート
