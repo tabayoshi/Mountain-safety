@@ -1,4 +1,6 @@
 <form action="">
+@csrf
+<!-- <input type="hidden" value="これでユーザーIDを送る> -->
 <div>
 <label for="title"> タイトル:</label>
 <input type="text" name="title">
