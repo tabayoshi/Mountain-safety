@@ -12,6 +12,7 @@ class Prefecture extends Model
     ];
     public function comments()
     {
-        return $this->hasMany(Comment::class);
+        return $this->hasMany(Post::class);
+        return $this->belongsTo(Mountain::class);
     }
 }

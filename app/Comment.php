@@ -13,6 +13,7 @@ class Comment extends Model
     ];
     public function comments()
     {
-        return $this->hasMany(Comment::class);
+        return $this->belongsTo(User::class);
+        return $this->belongsTo(Post::class);
     }
 }
