@@ -40,9 +40,12 @@ class User extends Model
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-    public function comments()
+    public function users()
     {
         return $this->hasMany(Comment::class);
+    }
+    public function posts()
+    {
         return $this->hasMany(Post::class);
     }
 }

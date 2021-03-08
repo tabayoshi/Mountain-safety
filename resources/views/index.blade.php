@@ -10,7 +10,7 @@
 <body>
 <h2>＜投稿記事一覧＞</h2>
   @foreach($posts as $post)
-    <a href="http://localhost:8888/public/show?id={{$post->id}}"><h3>{{$post->title}}</h3></a>
+    <a href="http://localhost:8888/public/show?id={{$post->id}}"><h3>{{$post->title}}：{{$post->created_at}}</h3></a>
   @endforeach
 </body>
 </html>

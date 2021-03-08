@@ -12,7 +12,7 @@
       <!-- <p>タイトル</p> -->
       <h3 >{{$post->title}}</h3>
       <!-- <p>投稿内容</p> -->
-      <p>{{$post->article}}</p>
+      <p>{{$post->article}}：{{$post->created_at->format('Y/m/d H:i')}}</p>
     @endforeach
   </div>
   </section>
@@ -48,5 +48,13 @@
     <p>過去に登った人</p>
   </div>
 @endsection
+
+@section('alert')
+   <p>今：{{$cb->format('Y/m/d H:i')}}</p>
+   <p>投稿時間：{{$post->created_at->format('Y/m/d H:i')}}</p>
+      <p>下山ボタン</p>
+@endsection
+
+
 </body>
 </html>
