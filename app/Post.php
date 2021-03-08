@@ -13,7 +13,7 @@ class Post extends Model
         'downhill_time',
         'alert_flag',
         'prefecture_id',
-        'user_id',
+        'user_id'
     ];
     public function comments()
     {
