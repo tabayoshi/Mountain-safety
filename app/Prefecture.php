@@ -10,7 +10,7 @@ class Prefecture extends Model
         'mountain_id',
         'prefecture_name',
     ];
-    public function post()
+    public function posts()
     {
         return $this->hasMany(Post::class);
     }
