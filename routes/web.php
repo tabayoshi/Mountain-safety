@@ -18,7 +18,10 @@ Route::get('/', 'IndexController@index');
 //投稿画面と処理のルート
 Route::resource('post', PostController::class)->only([
     'create',
+    'store'
     ]);
+//山の詳細ページのルートです
+Route::get('show_mountain', 'ShowMontainController@showMontain')->name('show_mountain');
 // 詳細画面(show)
 Route::get('/show', 'ShowController@show');
 Route::post('/show', 'ShowController@store');

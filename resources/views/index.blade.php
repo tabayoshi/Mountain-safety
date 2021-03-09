@@ -13,5 +13,6 @@
     <a href="http://localhost:8888/public/show?id={{$post->id}}"><h3>{{$post->title}}</h3></a>
   @endforeach
 <a href="{{route('post.create')}}">投稿ページ</a>
+<a href="{{route('show_mountain')}}">山の詳細ページ</a>
 </body>
 </html>
