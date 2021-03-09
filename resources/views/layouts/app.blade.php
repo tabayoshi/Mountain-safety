@@ -14,6 +14,7 @@
     <section class="post">
       @yield('post')
       <button>下山ボタン</button>
+      @yield('alert')
       <hr>
     </section>
 

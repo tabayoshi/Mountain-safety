@@ -10,8 +10,12 @@ class Prefecture extends Model
         'mountain_id',
         'prefecture_name',
     ];
-    public function comments()
+    public function posts()
     {
-        return $this->hasMany(Comment::class);
+        return $this->hasMany(Post::class);
+    }
+    public function mountain()
+    {
+        return $this->belongsTo(Mountain::class);
     }
 }
