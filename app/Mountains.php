@@ -10,8 +10,8 @@ class Mountains extends Model
         'mountain_name',
         'elevation',
     ];
-    public function comments()
+    public function prefectire()
     {
-        return $this->hasMany(Comment::class);
+        return $this->hasOne(Prefecture::class);
     }
 }
