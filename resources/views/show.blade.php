@@ -1,7 +1,9 @@
 @extends('layouts.app')
 
 @section('header')
-  投稿の詳細画面
+  @foreach($posts as $post)
+    投稿の詳細画面：{{$post->user_id}}
+  @endforeach
 @endsection
 
 @section('post')
@@ -51,8 +53,11 @@
 
 @section('alert')
    <p>今：{{$cb->format('Y/m/d H:i')}}</p>
-   <p>投稿時間：{{$post->created_at->format('Y/m/d H:i')}}</p>
-      <p>下山ボタン</p>
+   <p>下山時間：{{$post->downhill_time}}</p>
+    <button>下山ボタン</button>
+    @if($cb->gte($post->downhill_time))
+     <p>下山ボタンを押してください</p>
+    @endif
 @endsection
 
 

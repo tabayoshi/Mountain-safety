@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use App\Post;
 use App\Comment;
 use Carbon\Carbon;
@@ -15,10 +16,15 @@ class ShowController extends Controller
         $cb = new Carbon();
         // echo $cb;
         echo $cb->format('Y-m-d');
+    
+        $param = ['id' => $request->id];
+    // 名前取得
+        // $users = User::where('id',$param)->get();
+        // echo ($users);
 
     // 投稿記事表示
-        $param = ['id' => $request->id];
         $posts = Post::where('id',$param)->get();
+        echo $posts;
 
     // コメント表示
         $comments = Comment::where('post_id',$param)->get();
