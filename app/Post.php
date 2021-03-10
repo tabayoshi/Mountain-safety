@@ -12,7 +12,7 @@ class Post extends Model
         'climbing_time',
         'downhill_time',
         'alert_flag',
-        'prefecture_id',
+        'mountain_id',
         'user_id'
     ];
     public function comments()

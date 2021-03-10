@@ -54,7 +54,7 @@
 <select name="mountain_select">
 <option value="">選択してください</option>
 @foreach($mountain_select as $mountain_selects)
-<option value="{{ $mountain_selects->id }}" name="prefecture_id">{{ $mountain_selects->mountain_name }}</option>
+<option value="{{ $mountain_selects->id }}" name="mountain_id">{{ $mountain_selects->mountain_name }}</option>
 @endforeach
 </select>
 </div>
