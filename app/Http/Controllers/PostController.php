@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\PostRequest;
+use App\Mountain;
 use App\Post;
+
 
 class PostController extends Controller
 {
@@ -16,7 +18,8 @@ class PostController extends Controller
      */
     public function create()
     {
-     return view('create');   
+      $mountain_select = Mountain::all();
+      return view('create', compact('mountain_select'));   
     }
 
     /**

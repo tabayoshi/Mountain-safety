@@ -1,3 +1,15 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>投稿ページ</title>
+</head>
+<body>
+    
+</body>
+</html>
 <form action="{{ route('post.store') }}" method="POST">
 @csrf
 <!-- <input type="hidden" value="これでユーザーIDを送る> -->
@@ -41,6 +53,9 @@
 <label for="mountain_select">山登録:</label>
 <select name="mountain_select">
 <option value="">選択してください</option>
+@foreach($mountain_select as $mountain_selects)
+<option value="{{ $mountain_selects->id }}" name="prefecture_id">{{ $mountain_selects->mountain_name }}</option>
+@endforeach
 </select>
 </div>
 <div class="error">

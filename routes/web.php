@@ -21,7 +21,7 @@ Route::resource('post', PostController::class)->only([
     'store'
     ]);
 //山の詳細ページのルートです
-Route::get('show_mountain', 'ShowMontainController@showMontain')->name('show_mountain');
+Route::get('show_mountain/{mt}', 'ShowMontainController@showMontain')->name('show_mountain');
 // 詳細画面(show)
 Route::get('/show', 'ShowController@show');
 Route::post('/show', 'ShowController@store');

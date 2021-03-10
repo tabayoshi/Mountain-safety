@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Mountains extends Model
+class Mountain extends Model
 {
     protected $fillable = [
         'mountain_name',
