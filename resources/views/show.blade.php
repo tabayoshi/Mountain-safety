@@ -42,12 +42,22 @@
 @section('now')
   <div style="color:orange">
     <p>今登ってる人</p>
+    <!-- if(登山時間を比べた時に同じならば)
+    user_id ユーザー名を表示
+    else
+    今登ってる人はいません
+    endif -->
   </div>
 @endsection
 
 @section('past')
   <div style="color:orange">
     <p>過去に登った人</p>
+    <!-- if(登山時間を比べた時に大きかったら)
+    user_id ユーザー名を表示
+    else
+    過去に登った人は誰もいません
+    endif -->
   </div>
 @endsection
 
@@ -55,8 +65,10 @@
    <p>今：{{$cb->format('Y/m/d H:i')}}</p>
    <p>下山時間：{{$post->downhill_time}}</p>
     <button>下山ボタン</button>
-    @if($cb->gte($post->downhill_time))
-     <p>下山ボタンを押してください</p>
+    @if($downhill_alert->gte($post->downhill_time))
+      <p>下山ボタンを押してください：flag(1)</p>
+    @elseif($distress_alert->gte($post->downhill_time))
+      <p>遭難の可能性があります</p>
     @endif
 @endsection
 

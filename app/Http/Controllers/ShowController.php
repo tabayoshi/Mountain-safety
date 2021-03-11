@@ -13,14 +13,17 @@ class ShowController extends Controller
     public function show(Request $request)
     {
     // 現在時間取得
-        $cb = new Carbon();
-        // echo $cb;
-        echo $cb->format('Y-m-d');
+    $cb = new Carbon();
+    // echo $cb;
+    $downhill_alert = new Carbon('+120 minutes');
+        echo $downhill_alert->format('Y-m-d');
+    $distress_alert = new Carbon('+240 minutes');
+        echo $distress_alert->format('Y-m-d');
     
         $param = ['id' => $request->id];
     // 名前取得
         // $users = User::where('id',$param)->get();
-        // echo ($users);
+        // echo $users;
 
     // 投稿記事表示
         $posts = Post::where('id',$param)->get();
@@ -28,7 +31,13 @@ class ShowController extends Controller
 
     // コメント表示
         $comments = Comment::where('post_id',$param)->get();
-        return view('/show', ['posts' => $posts, 'comments' => $comments, 'cb' => $cb]);
+
+        return view('/show', ['posts' => $posts,
+        'comments' => $comments,
+        'cb' => $cb,
+        'downhill_alert' => $downhill_alert,
+        'distress_alert' => $distress_alert
+        ]);
     }
 
     // コメント投稿
@@ -45,7 +54,7 @@ class ShowController extends Controller
         );
 
         $comment = new Comment;
-        $comment->user_id = 1;
+        $comment->user_id = 1; //&request->user_idに変更する
         $comment->post_id = $request->id;
         $comment->comment = $request->comment;
         $comment->save();

@@ -13,7 +13,7 @@
 
     <section class="post">
       @yield('post')
-      <button>下山ボタン</button>
+      <!-- <button>下山ボタン</button> -->
       @yield('alert')
       <hr>
     </section>
@@ -35,7 +35,7 @@
     <hr>
 
     <section class="alert">
-    <p>下山アラート</p> <!-- laravel Carbonを使う-->
+    <!-- <p>下山アラート</p> laravel Carbonを使う -->
     <p>遭難アラート</p>
     </section>
     <a href="http://localhost:8888/public/">戻る</a>
