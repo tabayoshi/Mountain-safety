@@ -38,6 +38,7 @@
 @endsection
 
 @section('now')
+
   <div style="color:orange">
     <p>今登ってる人</p>
   </div>
@@ -50,11 +51,10 @@
 @endsection
 
 @section('alert')
-   <p>今：{{$cb->format('Y/m/d H:i')}}</p>
-   <p>投稿時間：{{$post->created_at->format('Y/m/d H:i')}}</p>
-      <p>下山ボタン</p>
+   <p>今：{{$cb}}</p>
+   <p>投稿時間：{{$post->downhill_time}}</p>
+      <p>下山アラート：下山ボタンが押されていません。下山ボタンを押してください。</p>
 @endsection
-
 
 </body>
 </html>
