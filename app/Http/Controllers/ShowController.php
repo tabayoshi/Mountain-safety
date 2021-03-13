@@ -15,21 +15,24 @@ class ShowController extends Controller
     
 
     // 現在時間取得
-        $cb = new Carbon();
-        echo $cb;
+        $today = Carbon::now();;
+        echo '今：';
+        echo $today;
         echo '<br>';
 
     // 下山アラート時間
     // 現時刻-下山時間＝２時間以上
         $down = new Carbon();
-        $down->subHour(2);
-    echo $down;
+        $down->addHour(2);
+        echo '２時間後：';
+        echo $down;
         echo '<br>';
     // 
     // 遭難アラート時間
     // 現時刻-下山時間＝４時間以上
         $distress = new Carbon();
-        $distress->subHour(4);
+        $distress->addHour(4);
+        echo '４時間後：';
         echo $distress;
         echo '<br>';
         
@@ -39,13 +42,13 @@ class ShowController extends Controller
         $posts = Post::where('id',$param)->get();
         // echo $posts;
         // リレーション：名前の取得
-        $users_p = User::with('posts:user_id')->get(['name']);
+        User::with('posts:user_id')->get(['name']);
         
         // コメント表示
         $comments = Comment::where('post_id',$param)->get();
         // echo $comments;
         // リレーション：名前の取得
-        $users_c = User::with('comments:user_id')->get(['name']);
+        User::with('comments:user_id')->get(['name']);
         
         
         // 今登ってる人 過去に登った人
@@ -71,7 +74,7 @@ class ShowController extends Controller
         [
         'posts' => $posts,
         'comments' => $comments,
-        'cb' => $cb,
+        'today' => $today,
         'down' => $down,
         'distress' => $distress,
         ]);

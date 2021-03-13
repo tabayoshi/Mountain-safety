@@ -9,7 +9,7 @@
   <body>
 
     @foreach($posts as $post)
-      {{$post->user_id}}
+      {{$post->user->name}}
     @endforeach
     <!-- ------------------------------------ -->
 
@@ -43,5 +43,7 @@
 
     </section>
     <a href="http://localhost:8888/public/">戻る</a>
+    
+   
   </body>
 </html>

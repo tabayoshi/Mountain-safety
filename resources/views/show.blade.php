@@ -21,7 +21,7 @@
 @endsection
 
 @section('store')
-  <form method="post" action="">
+  <form method="post" action="route{{}}">
       {{ csrf_field() }} 
           <textarea name="comment" cols="30" rows="5" value=""></textarea>
       <input type="submit" name="submit" value="投稿">
@@ -41,9 +41,9 @@
 
 @section('now')
   <div style="color:orange">
-    <!-- 今登ってる人 --> <!-- 日付で判断する-->
+    <!-- 今登ってる人 --> <!-- 日付で判断する--> <!-- 下山日付と同じ日付 -->
     @foreach($posts as $time) 
-      @if(!$cb->eq($time))
+      @if(!$today->eq($time))
         <p>今登ってる人はいません</p>         
       @else
         <p>ユーザー{{$time->user_id}}</p>         
@@ -54,10 +54,10 @@
 
 @section('past')
   <div style="color:orange">
-    <!-- 過去に登った人 --> <!-- 日付で判断する-->
+    <!-- 過去に登った人 --> <!-- 日付で判断する-->  <!-- 下山日付よりも大きい日付 -->
     @foreach($posts as $time) 
-      @if(!$cb->gt($time))
-        <p>ユーザー{{$post->id}}</p>         
+      @if(!$today->gt($time))
+        <p>{{ $post->user->name }}(ユーザー{{$post->user_id}})</p>         
       @else
         <p>まだ誰も登っていません</p>         
       @endif
@@ -66,7 +66,7 @@
 @endsection
 
 @section('alert')
-   <!-- <p>今：{{$cb->format('Y/m/d H:i')}}</p> -->
+   <!-- <p>今：{{$today->format('Y/m/d H:i')}}</p> -->
    <p>下山時間：{{$post->downhill_time}}</p>
 
     <button>下山ボタン</button>

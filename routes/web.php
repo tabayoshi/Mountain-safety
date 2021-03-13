@@ -23,6 +23,7 @@ Route::resource('post', PostController::class)->only([
 //山の詳細ページのルートです
 Route::get('show_mountain/{mt}', 'ShowMontainController@showMontain')->name('show_mountain');
 // 投稿の詳細画面(show)
-Route::get('/show', 'ShowController@show');
+// Route::get('/show', 'ShowController@show');
+Route::get('show/{id}', 'ShowController@show')->name('show');
 Route::post('/show', 'ShowController@store');
 
