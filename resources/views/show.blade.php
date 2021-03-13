@@ -2,7 +2,7 @@
 
 @section('header')
   @foreach($posts as $post)
-    投稿の詳細画面：ユーザー{{$post->user_id}}
+    投稿の詳細：{{ $post->user->name }}
   @endforeach
 @endsection
 
@@ -32,7 +32,7 @@
   <div style="color:blue">
     <ul>
       @foreach($comments as $comment)
-        <li><p>{{$comment->comment}}：ユーザー{{$comment->user_id}}</p></li>           
+        <li><p>{{$comment->comment}}：{{ $comment->user->name }}</p></li>           
       @endforeach
     </ul>
   </div>

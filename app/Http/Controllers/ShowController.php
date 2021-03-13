@@ -12,6 +12,8 @@ class ShowController extends Controller
 {
     public function show(Request $request)
     {
+    
+
     // 現在時間取得
         $cb = new Carbon();
         echo $cb;
@@ -36,11 +38,15 @@ class ShowController extends Controller
         // 投稿記事表示
         $posts = Post::where('id',$param)->get();
         // echo $posts;
+        // リレーション：名前の取得
+        $users_p = User::with('posts:user_id')->get(['name']);
         
         // コメント表示
         $comments = Comment::where('post_id',$param)->get();
         // echo $comments;
-        echo '<br>';
+        // リレーション：名前の取得
+        $users_c = User::with('comments:user_id')->get(['name']);
+        
         
         // 今登ってる人 過去に登った人
         $times = Post::where('mountain_id', $param)->get(['user_id', 'mountain_id', 'downhill_time']);
@@ -86,7 +92,6 @@ class ShowController extends Controller
 
             $comment = new Comment;
             $comment->user_id = 1; //&request->user_idに変更する
-            $comment->name = $request->name; //&request->user_idに変更する
             $comment->post_id = $request->id;
             $comment->comment = $request->comment;
             $comment->save();

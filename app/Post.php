@@ -15,6 +15,7 @@ class Post extends Model
         'mountain_id',
         'user_id'
     ];
+
     public function comments()
     {
         return $this->hasMany(Comment::class);
