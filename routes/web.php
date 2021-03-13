@@ -15,7 +15,14 @@ use Illuminate\Http\Request;
 */
 // 仮index
 Route::get('/', 'IndexController@index');
-
-// 詳細画面(show)
+//投稿画面と処理のルート
+Route::resource('post', PostController::class)->only([
+    'create',
+    'store'
+    ]);
+//山の詳細ページのルートです
+Route::get('show_mountain/{mt}', 'ShowMontainController@showMontain')->name('show_mountain');
+// 投稿の詳細画面(show)
 Route::get('/show', 'ShowController@show');
 Route::post('/show', 'ShowController@store');
+

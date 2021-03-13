@@ -13,30 +13,61 @@ class ShowController extends Controller
     public function show(Request $request)
     {
     // 現在時間取得
-    $cb = new Carbon();
-    // echo $cb;
-    $downhill_alert = new Carbon('+120 minutes');
-        echo $downhill_alert->format('Y-m-d');
-    $distress_alert = new Carbon('+240 minutes');
-        echo $distress_alert->format('Y-m-d');
-    
+        $cb = new Carbon();
+        echo $cb;
+        echo '<br>';
+
+    // 下山アラート時間
+    // 現時刻-下山時間＝２時間以上
+        $down = new Carbon();
+        $down->subHour(2);
+    echo $down;
+        echo '<br>';
+    // 
+    // 遭難アラート時間
+    // 現時刻-下山時間＝４時間以上
+        $distress = new Carbon();
+        $distress->subHour(4);
+        echo $distress;
+        echo '<br>';
+        
         $param = ['id' => $request->id];
-    // 名前取得
-        // $users = User::where('id',$param)->get();
-        // echo $users;
-
-    // 投稿記事表示
+        
+        // 投稿記事表示
         $posts = Post::where('id',$param)->get();
-        echo $posts;
-
-    // コメント表示
+        // echo $posts;
+        
+        // コメント表示
         $comments = Comment::where('post_id',$param)->get();
+        // echo $comments;
+        echo '<br>';
+        
+        // 今登ってる人 過去に登った人
+        $times = Post::where('mountain_id', $param)->get(['user_id', 'mountain_id', 'downhill_time']);
+        echo $times;
+        echo '<br>';
 
-        return view('/show', ['posts' => $posts,
+        // $posts = Post::all();
+        // $users = [];
+        // foreach ($posts as $post) {
+        //     $users[] = $posts->user_id;
+        // }
+        // dd($users);
+
+        // $collection = collect($posts);
+        // $unique = $collection->unique();
+            // return $mountain_id['mountain_id'];
+        // });
+        // echo $unique;
+        // echo '<br>';
+
+        return view('/show', 
+        [
+        'posts' => $posts,
         'comments' => $comments,
         'cb' => $cb,
-        'downhill_alert' => $downhill_alert,
-        'distress_alert' => $distress_alert
+        'down' => $down,
+        'distress' => $distress,
         ]);
     }
 
@@ -53,12 +84,15 @@ class ShowController extends Controller
             ]
         );
 
-        $comment = new Comment;
-        $comment->user_id = 1; //&request->user_idに変更する
-        $comment->post_id = $request->id;
-        $comment->comment = $request->comment;
-        $comment->save();
-        // dd($comment);
+            $comment = new Comment;
+            $comment->user_id = 1; //&request->user_idに変更する
+            $comment->name = $request->name; //&request->user_idに変更する
+            $comment->post_id = $request->id;
+            $comment->comment = $request->comment;
+            $comment->save();
+            // dd($comment);
         return redirect()->back();
     }
+
+
 }

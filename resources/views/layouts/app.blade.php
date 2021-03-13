@@ -7,13 +7,18 @@
     <title>@yield('header')</title>
   </head>
   <body>
+
+    @foreach($posts as $post)
+      {{$post->user_id}}
+    @endforeach
+    <!-- ------------------------------------ -->
+
     <header>
       <h1>@yield('header')</h3>
     </header>
 
     <section class="post">
       @yield('post')
-      <!-- <button>下山ボタン</button> -->
       @yield('alert')
       <hr>
     </section>
@@ -26,17 +31,16 @@
     </section>
 
     <section class="now">
+    <h2>今登ってる人</h2>
       @yield('now')
     </section>
 
     <section class="past">
+    <h2>過去に登った人</h2>
       @yield('past')
     </section>
     <hr>
 
-    <section class="alert">
-    <!-- <p>下山アラート</p> laravel Carbonを使う -->
-    <p>遭難アラート</p>
     </section>
     <a href="http://localhost:8888/public/">戻る</a>
   </body>
