@@ -36,4 +36,8 @@ class PostController extends Controller
         return back();
     }
 
+    public function __construct()
+    {
+      $this->middleware('auth');
+    }
 }

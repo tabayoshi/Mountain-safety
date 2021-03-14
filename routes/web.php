@@ -17,11 +17,14 @@ use Illuminate\Http\Request;
 Auth::routes();
 
 Route::get('/', 'IndexController@index')->name('index');
-//投稿画面と処理のルート
-Route::resource('post', PostController::class)->only([
-    'create',
-    'store'
+
+Route::group(['middleware' => ['auth']], function(){
+    //投稿画面と処理のルート
+    Route::resource('post', PostController::class)->only([
+        'create',
+        'store'
     ]);
+});
 //山の詳細ページのルートです
 Route::get('show_mountain/{mt}', 'ShowMontainController@showMontain')->name('show_mountain');
 // 詳細画面(show)
