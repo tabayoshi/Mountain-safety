@@ -8,9 +8,16 @@ use App\Mountain;
 
 class IndexController extends Controller
 {
-    public function index(Request $request) {
-        $posts = Post::all();
-        $mountains = Mountain::orderBy('id', 'desc')->get();
-        return view('index', compact('posts','mountains'));
+<<<<<<< HEAD
+    public function index() {
+      $posts = Post::all();
+      $mountains = Mountain::orderBy('id', 'desc')->paginate(15);
+    return view('index', compact('posts','mountains'));
+=======
+    public function index() {
+      $posts = Post::all();
+      $mountains = Mountain::orderBy('id', 'desc')->paginate(15);
+    return view('index', compact('posts','mountains'));
+>>>>>>> origin
   }
 }
