@@ -11,6 +11,6 @@ class IndexController extends Controller
     public function index(Request $request) {
         $posts = Post::all();
         $mountains = Mountain::orderBy('id', 'desc')->get();
-    return view('index', compact('posts','mountains'));
+        return view('index', compact('posts','mountains'));
   }
 }

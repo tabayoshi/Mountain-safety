@@ -13,8 +13,10 @@ use Illuminate\Http\Request;
 | contains the "web" middleware group. Now create something great!
 |
 */
-// 仮index
-Route::get('/', 'IndexController@index');
+
+Auth::routes();
+
+Route::get('/', 'IndexController@index')->name('index');
 //投稿画面と処理のルート
 Route::resource('post', PostController::class)->only([
     'create',
