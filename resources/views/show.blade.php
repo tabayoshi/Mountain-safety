@@ -21,7 +21,7 @@
 @endsection
 
 @section('store')
-  <form method="post" action="route{{}}">
+  <form method="post" action="{{ route('show.store') }}">
       {{ csrf_field() }} 
           <textarea name="comment" cols="30" rows="5" value=""></textarea>
       <input type="submit" name="submit" value="投稿">
@@ -41,41 +41,42 @@
 
 @section('now')
   <div style="color:orange">
-    <!-- 今登ってる人 --> <!-- 日付で判断する--> <!-- 下山日付と同じ日付 -->
-    @foreach($posts as $time) 
-      @if(!$today->eq($time))
-        <p>今登ってる人はいません</p>         
-      @else
-        <p>ユーザー{{$time->user_id}}</p>         
-      @endif
-     @endforeach
+  @foreach($people as $person)
+    @if("")
+      <!-- <p>今登ってる人はいません</p> -->
+    @elseif($today->eq($person))
+      {{$person->user->name}}
+    @else
+      <p>今登ってる人はいません</p>
+    @endif
+  @endforeach
   </div>
 @endsection
 
+    <!-- 今登ってる人 --> <!-- 日付で判断する--> <!-- 下山日付と同じ日付 -->       
+
 @section('past')
   <div style="color:orange">
+  @foreach($people as $person)
+    @if(!$today->gt($person))
+      {{$person->user->name}}
+    @else
+      <p>まだ誰も登っていません</p>         
+    @endif
+  @endforeach
     <!-- 過去に登った人 --> <!-- 日付で判断する-->  <!-- 下山日付よりも大きい日付 -->
-    @foreach($posts as $time) 
-      @if(!$today->gt($time))
+    <!-- @foreach($posts as $time) 
         <p>{{ $post->user->name }}(ユーザー{{$post->user_id}})</p>         
-      @else
-        <p>まだ誰も登っていません</p>         
-      @endif
-     @endforeach
+     @endforeach -->
   </div>
 @endsection
 
 @section('alert')
-   <!-- <p>今：{{$today->format('Y/m/d H:i')}}</p> -->
-   <p>下山時間：{{$post->downhill_time}}</p>
-
-    <button>下山ボタン</button>
-    @if($down->gte($post->downhill_time))
-      <p>下山アラート：下山ボタンが押されていません。下山ボタンを押してください</p>
-    @elseif($distress->gte($post->downhill_time))
-      <p>遭難アラート：遭難の可能性があります</p>
+    <p>今：{{$today->format('Y/m/d H:i')}}</p>
+    <p>下山時間：{{$person->downhill_time}}</p>
+    @if($distress->gte($person->downhill_time))
+      <h1 class="alert">遭難アラート：遭難の可能性があります</h1>
+    @elseif(!$down->gte($person->downhill_time))
+      <h1 class="alert">下山アラート：下山ボタンが押されていません。下山ボタンを押してください</h1>
     @endif
 @endsection
-
-</body>
-</html>

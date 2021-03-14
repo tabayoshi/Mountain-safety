@@ -22,8 +22,17 @@ Route::resource('post', PostController::class)->only([
     ]);
 //山の詳細ページのルートです
 Route::get('show_mountain/{mt}', 'ShowMontainController@showMontain')->name('show_mountain');
-// 投稿の詳細画面(show)
-// Route::get('/show', 'ShowController@show');
+
+// 投稿の詳細画面
 Route::get('show/{id}', 'ShowController@show')->name('show');
-Route::post('/show', 'ShowController@store');
+// Route::post('show', 'ShowController@store')->name('store');
+// Route::resource('show', 'ShowController', ['only' => [
+//     'show',
+//     'time',
+//     'store'
+// ]]);
+
+Route::resource('show', ShowController::class)->only([
+    'store'
+]);
 

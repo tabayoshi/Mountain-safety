@@ -5,21 +5,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('header')</title>
+    <style>
+      .alert {
+        font-size: 20px;
+        color: white;
+        border: 1px solid red;
+        background: red;
+        display: inline-block;
+        padding: 0 10px;
+      }
+    </style>
   </head>
   <body>
-
-    @foreach($posts as $post)
-      {{$post->user->name}}
-    @endforeach
-    <!-- ------------------------------------ -->
-
     <header>
       <h1>@yield('header')</h3>
+      @yield('alert')
     </header>
 
     <section class="post">
       @yield('post')
-      @yield('alert')
+        <button>下山ボタン</button>
       <hr>
     </section>
 
@@ -31,18 +36,18 @@
     </section>
 
     <section class="now">
-    <h2>今登ってる人</h2>
+    <h3>今登ってる人</h3>
       @yield('now')
     </section>
 
     <section class="past">
-    <h2>過去に登った人</h2>
+    <h3>過去に登った人</h3>
       @yield('past')
     </section>
     <hr>
 
     </section>
-    <a href="http://localhost:8888/public/">戻る</a>
+    <a href="{{ url('/') }}">戻る</a>
     
    
   </body>
