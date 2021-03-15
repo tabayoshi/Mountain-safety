@@ -33,7 +33,7 @@ class PostController extends Controller
         $post = $request->all();
         //postリクエストをdbに送信
         Post::create($post);
-        return back();
+        return back()->with('flash_message', '投稿が完了しました');
     }
 
 }
