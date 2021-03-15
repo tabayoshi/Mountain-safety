@@ -13,7 +13,6 @@ use Illuminate\Http\Request;
 | contains the "web" middleware group. Now create something great!
 |
 */
-<<<<<<< HEAD
 
 //ログイン時に使用
 Auth::routes();
@@ -26,14 +25,6 @@ Route::group(['middleware' => ['auth']], function(){
     Route::resource('post', PostController::class)->only([
         'create',
         'store'
-=======
-// 仮index
-Route::get('/', 'IndexController@index')->name('index');
-//投稿画面と処理のルート
-Route::resource('post', PostController::class)->only([
-    'create',
-    'store'
->>>>>>> origin
     ]);
 });
 //山の詳細ページのルートです
