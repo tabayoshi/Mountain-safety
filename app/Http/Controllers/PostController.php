@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\PostRequest;
 use App\Mountain;
 use App\Post;
-
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
@@ -19,7 +19,8 @@ class PostController extends Controller
     public function create()
     {
       $mountain_select = Mountain::all();
-      return view('create', compact('mountain_select'));   
+      $user_id = Auth::id();
+      return view('create', compact('mountain_select','user_id'));   
     }
 
     /**
@@ -33,7 +34,11 @@ class PostController extends Controller
         $post = $request->all();
         //postリクエストをdbに送信
         Post::create($post);
-        return back();
+        return redirect('/')->with('flash_message', '投稿が完了しました');
     }
 
+    public function __construct()
+    {
+      $this->middleware('auth');
+    }
 }
