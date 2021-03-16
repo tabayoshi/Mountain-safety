@@ -15,8 +15,10 @@ class CreatePostsTable extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('mountain_id');
-            $table->foreignId('user_id');
+            $table->foreignId('mountain_id')->references('id')->on('mountains')
+            ->onDelete('cascade');
+            $table->foreignId('user_id')->references('id')->on('users')
+            ->onDelete('cascade');
             $table->string('title', 30);
             $table->text('article');
             $table->datetime('climbing_time');

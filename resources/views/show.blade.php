@@ -1,7 +1,9 @@
 @extends('layouts.app')
 
 @section('header')
-  投稿の詳細画面
+  @foreach($posts as $post)
+    投稿の詳細：{{ $post->user->name }}
+  @endforeach
 @endsection
 
 @section('post')
@@ -19,7 +21,7 @@
 @endsection
 
 @section('store')
-  <form method="post" action="">
+  <form method="post" action="{{ route('show.store') }}">
       {{ csrf_field() }} 
           <textarea name="comment" cols="30" rows="5" value=""></textarea>
       <input type="submit" name="submit" value="投稿">
@@ -28,33 +30,53 @@
 
 @section('comment')
   <div style="color:blue">
-  <ul>
-    @foreach($comments as $comment)
-      <li><p>{{$comment->comment}}</p></li>           
-     @endforeach
-  </ul>
+    <ul>
+      @foreach($comments as $comment)
+        <li><p>{{$comment->comment}}：{{ $comment->user->name }}</p></li>           
+      @endforeach
+    </ul>
   </div>
   <hr>
 @endsection
 
 @section('now')
   <div style="color:orange">
-    <p>今登ってる人</p>
+  @foreach($people as $person)
+    @if("")
+      <!-- <p>今登ってる人はいません</p> -->
+    @elseif($today->eq($person))
+      {{$person->user->name}}
+    @else
+      <p>今登ってる人はいません</p>
+    @endif
+  @endforeach
   </div>
 @endsection
 
+    <!-- 今登ってる人 --> <!-- 日付で判断する--> <!-- 下山日付と同じ日付 -->       
+
 @section('past')
   <div style="color:orange">
-    <p>過去に登った人</p>
+  @foreach($people as $person)
+    @if(!$today->gt($person))
+      {{$person->user->name}}
+    @else
+      <p>まだ誰も登っていません</p>         
+    @endif
+  @endforeach
+    <!-- 過去に登った人 --> <!-- 日付で判断する-->  <!-- 下山日付よりも大きい日付 -->
+    <!-- @foreach($posts as $time) 
+        <p>{{ $post->user->name }}(ユーザー{{$post->user_id}})</p>         
+     @endforeach -->
   </div>
 @endsection
 
 @section('alert')
-   <p>今：{{$cb->format('Y/m/d H:i')}}</p>
-   <p>投稿時間：{{$post->created_at->format('Y/m/d H:i')}}</p>
-      <p>下山ボタン</p>
+    <p>今：{{$today->format('Y/m/d H:i')}}</p>
+    <p>下山時間：{{$person->downhill_time}}</p>
+    @if($distress->gte($person->downhill_time))
+      <h1 class="alert">遭難アラート：遭難の可能性があります</h1>
+    @elseif(!$down->gte($person->downhill_time))
+      <h1 class="alert">下山アラート：下山ボタンが押されていません。下山ボタンを押してください</h1>
+    @endif
 @endsection
-
-
-</body>
-</html>
