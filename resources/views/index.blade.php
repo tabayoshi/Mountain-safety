@@ -67,9 +67,6 @@
 
         <main class="py-4">
             @yield('content')
-        </main>
-    </div>
-
 <a href="{{route('post.create')}}">投稿ページ</a>
 <h2>投稿記事一覧</h2>
   @foreach($posts as $post)
@@ -110,5 +107,8 @@
     @endforeach
     {{ $mountains->links() }}
     @endempty
+    </div>
+        </main>
+
 </body>
 </html>

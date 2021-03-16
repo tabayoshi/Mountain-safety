@@ -16,9 +16,11 @@ class IndexController extends Controller
     public function search(Request $request) {
       $posts = Post::all();
       if(isset($request->search)){
+        // 検索されたら表示
         $search = Mountain::where('mountain_name', 'like', "%$request->search%")->get();
         $search_result = $request->search.'の結果'. count($search).'件見つかりました。';
       }else{
+        // 検索されなかったら表示
         $search = 0;
         $search_result = '一致する検索結果はありませんでした。';
       }
