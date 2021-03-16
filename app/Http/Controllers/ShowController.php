@@ -43,10 +43,7 @@ class ShowController extends Controller
         $distress->addHour(4);
         // dd($distress);
 
-        //      User::with('posts:user_id')->get(['name']);
-        //     //  User::with('comments:user_id')->get(['name']);
-        //      $param = ['id' => $request->id];
-        //      $posts = Post::where('id',$param)->get();
+        
         
 
         // $posts = Post::all();
