@@ -57,23 +57,7 @@ p{
 	width: 100%;
 	background-color: rgba(218,60,65,.3);
 }
-.ef ~ label {
-	position: absolute;
-	z-index: -1;
-	top: 10px;
-	left: 14px;
-	width: 100%;
-	transition: 0.3s;
-	letter-spacing: 0.5px;
-	color: #aaaaaa;
-}
-.ef:focus ~ label, .cp_iptxt.ef ~ label {
-	font-size: 12px;
-	top: -18px;
-	left: 0;
-	transition: 0.3s;
-	color: #da3c41;
-}
+
 .efs {
 	resize: none;
 	position: relative;
@@ -103,47 +87,4 @@ p{
 .efa:focus{
 	transition: 0.4s;
 	background-color: rgba(218,60,65,.3);
-}
-.efs ~ label {
-	position: absolute;
-	z-index: -1;
-	top: 10px;
-	left: 14px;
-	width: 100%;
-	transition: 0.3s;
-	letter-spacing: 0.5px;
-	color: #aaaaaa;
-}
-.efs:focus ~ label{
-	font-size: 12px;
-	top: -18px;
-	left: 0;
-	transition: 0.3s;
-	color: #da3c41;
-}
-.efa ~ label {
-	opacity: 0;
-	position: absolute;
-	z-index: -1;
-	top: 10px;
-	left: 14px;
-	width: 100%;
-	transition: 0.3s;
-	letter-spacing: 0.5px;
-	color: #aaaaaa;
-}
-.efa:focus ~ label{
-	opacity: 1;
-	font-size: 12px;
-	top: -18px;
-	left: 0;
-	transition: 0.3s;
-	color: #da3c41;
-}
-.efa:focus ~ label{
-	font-size: 12px;
-	top: -18px;
-	left: 0;
-	transition: 0.3s;
-	color: #da3c41;
 }

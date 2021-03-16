@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,7 +19,7 @@ use Illuminate\Http\Request;
 Auth::routes();
 
 Route::get('/', 'IndexController@index')->name('index');
-
+Route::post('/search', 'IndexController@search')->name('search');
 //ログインしていないとログインページに飛ぶ
 Route::group(['middleware' => ['auth']], function(){
     //投稿画面と処理のルート
