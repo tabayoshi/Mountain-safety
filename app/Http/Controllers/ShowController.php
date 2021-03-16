@@ -19,27 +19,18 @@ class ShowController extends Controller
         $comments = Comment::where('post_id',$request->id)->get(); // コメント表示
         User::with('comments:user_id')->get(['name']); // リレーション：名前の取得
 
-    //     return view('show', 
-    //     // compact('posts', 'comments'));
-    //     [
-    //     'posts' => $posts,
-    //     'comments' => $comments,
-    //     ]);
-    // }    
-
 // 時間取得/今登ってる人・過去に登った人
-    // public function time(Request $request)
-    // { 
         // 今登ってる人 過去に登った人
-        $people = Post::where('id', $request->id)->get();
-        $people = Post::pluck('mountain_id', 'id');
-        dd($people);
+        $people = Post::where('mountain_id', $request->id)->get();
+                // echo $people;
+
+        // $people = Post::pluck('mountain_id', 'id');
+        // $people = User::with('posts:user_id')->get(['name']);
         // echo $people;
-        // $mountain_id = $request->mountain_id;
-        $person = Post::where('mountain_id', $people)->get();
+        // $person = Post::where('id', $request->id)->get();
         // foreach ($people as $person) {
         // }
-        // dd($person);
+        // dd($peron);
         
         $today = Carbon::now();; // 現在時間取得
         // dd($today);
@@ -78,6 +69,7 @@ class ShowController extends Controller
         'posts' => $posts,
         'comments' => $comments,
         'people' => $people,
+        // 'person' => $person,
         'today' => $today,
         'down' => $down,
         'distress' => $distress,

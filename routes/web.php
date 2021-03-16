@@ -35,4 +35,3 @@ Route::get('show/{id}', 'ShowController@show')->name('show');
 Route::resource('show', ShowController::class)->only([
     'store'
 ]);
-
