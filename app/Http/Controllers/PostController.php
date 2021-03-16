@@ -36,4 +36,8 @@ class PostController extends Controller
         return back()->with('flash_message', '投稿が完了しました');
     }
 
+    public function __construct()
+    {
+      $this->middleware('auth');
+    }
 }
