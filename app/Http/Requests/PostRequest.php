@@ -29,7 +29,7 @@ class PostRequest extends FormRequest
             'article'=>'required',
             'climbing_time'=>'required',
             'downhill_time'=>'required',
-            'mountain_select'=>'required'
+            'mountain_id'=>'required | not_in: 0'
         ];
     }
     public function messages()
@@ -40,7 +40,7 @@ class PostRequest extends FormRequest
             'article' => '記事は必須項目です',
             'climbing_time' => '登山日は必須項目です',
             'downhill_time' => '下山時間は必須項目です',
-            'mountain_select' => '登山する山は必須項目です',
+            'mountain_id.not_in' => '登山する山は必須項目です',
         ];
     }
 }

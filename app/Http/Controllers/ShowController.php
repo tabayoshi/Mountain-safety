@@ -55,7 +55,6 @@ class ShowController extends Controller
         //     $users[] = $posts->user_id;
         // }
         // dd($users);
-
         // $collection = collect($posts);
         // $unique = $collection->unique();
             // return $mountain_id['mountain_id'];

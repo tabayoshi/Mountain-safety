@@ -1,0 +1,90 @@
+body{
+	margin: 0px 100px;
+}
+.error{
+    color:red;
+	margin-left: 40px;
+}
+p{
+	margin: 0;
+}
+.cp_iptxt {
+	position: relative;
+	width: 80%;
+	margin: 10px;
+}
+.submit{
+	text-align: center;
+}
+.submit_button{
+	width: 50%;
+	margin: 40px;
+}
+.cp_iptxt input[type='text'] {
+	font: 15px/24px sans-serif;
+	box-sizing: border-box;
+	width: 100%;
+	letter-spacing: 1px;
+	padding-left: 4em;
+}
+.ef {
+	position: relative;
+	padding: 7px 15px;
+	border: 0;
+	border: 1px solid #1b2538;
+	background: transparent;
+}
+.efa {
+	position: relative;
+	padding: 7px 15px;
+	border: 0;
+	border: 1px solid #1b2538;
+	background: transparent;
+}
+.ef ~ .focus_bg {
+	position: absolute;
+	z-index: -1;
+	top: 0;
+	left: 0;
+	width: 0;
+	height: 100%;
+	background-color: transparent;
+}
+.ef:focus {
+	border: 1px solid #da3c41;
+}
+.ef:focus ~ .focus_bg, .cp_iptxt.ef ~ .focus_bg {
+	width: 100%;
+	background-color: rgba(218,60,65,.3);
+}
+
+.efs {
+	resize: none;
+	position: relative;
+	padding: 7px 12px;
+	border: 0;
+	border: 1px solid #1b2538;
+	background: transparent;
+}
+.efs ~ .focus_bg {
+	position: absolute;
+	z-index: -1;
+	top: 0;
+	left: 0;
+	width: 0;
+	height: 100%;
+	transition: 0.4s;
+	background-color: transparent;
+}
+.efs:focus{
+	border: 1px solid #da3c41;
+}
+.efs:focus{
+	width: 100%;
+	transition: 0.4s;
+	background-color: rgba(218,60,65,.3);
+}
+.efa:focus{
+	transition: 0.4s;
+	background-color: rgba(218,60,65,.3);
+}
