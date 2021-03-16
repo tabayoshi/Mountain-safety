@@ -10,11 +10,10 @@
   <body>
     <form action="{{ route('post.store') }}" method="POST" autocomplete="off">
     @csrf 
-      <!-- <input type="hidden" value="これでユーザーIDを送る> -->
+      <input type="hidden" value="{{ $user_id }}" name="user_id">
       <p>タイトル:</p>
       <div class="cp_iptxt">
         <input type="text" name="title" class="ef">
-        <label>タイトル</label>
         <span class="focus_bg"></span>
       </div>
       @if($errors->has("title")) 
@@ -23,7 +22,6 @@
       <p>記事:</p>
       <div class="cp_iptxt">
         <textarea name="article" cols="30" rows="10" class="efs"></textarea>
-        <label>記事</label>
         <span class="focus_bg"></span>
       </div>
       @if($errors->has("article")) 
@@ -32,7 +30,6 @@
       <p>下山時間</p>
       <div class="cp_iptxt">
         <input type="datetime-local" name="climbing_time" class="efa">
-        <label>下山時間</label>
         <span class="focus_bg"></span>
       </div>
       @if($errors->has("climbing_time")) 
@@ -43,7 +40,6 @@
       <p>登山日:</p>
       <div class="cp_iptxt">
         <input type="date" name="downhill_time" class="efa">
-        <label>登山日</label>
         <span class="focus_bg"></span>
       </div>
       @if($errors->has("downhill_time")) 

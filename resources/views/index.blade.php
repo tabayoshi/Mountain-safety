@@ -75,6 +75,11 @@
   @foreach($posts as $post)
     <a href="http://localhost:8888/public/show?id={{$post->id}}"><h3>{{$post->title}}：{{$post->created_at}}</h3></a>
   @endforeach
+  @if (session('flash_message')) 
+    <div class="flash_message">
+     {{ session('flash_message') }} 
+    </div>
+   @endif
   <h2>山の情報一覧</h2>
     <p>山検索フォーム</p>
     <form action="{{ route('search') }}" method="POST">
@@ -85,7 +90,7 @@
     <!-- 検索結果（検索された時だけ表示） -->
     @isset($search_result)
     <h2>{{ $search_result }}</h2>
-    <!-- 入力が未記入の場合は、検索しても非表示   -->
+    <!-- 検索フォームで、入力が未記入の場合は検索しても非表示   -->
     @if($search !== 0)
     @foreach($search as $searchs)
     <div>
@@ -96,7 +101,7 @@
       <a href="{{ route('index') }}">一覧ページに戻る</a>
     @endisset
 
-    <!-- 検索されなかったときは、一覧を表示 -->
+    <!-- 検索してないときは、一覧を表示 -->
     @empty($search_result)
     @foreach($mountains as $mountain)
     <div>
