@@ -12,7 +12,7 @@
     <!-- 投稿内容表示 -->
     @foreach($posts as $post)
       <!-- <p>タイトル</p> -->
-      <h3 >{{$post->title}}</h3>
+      <h3 >{{$post->id}}{{$post->title}}</h3>
       <!-- <p>投稿内容</p> -->
       <p>{{$post->article}}：{{$post->created_at->format('Y/m/d H:i')}}</p>
     @endforeach
@@ -21,7 +21,8 @@
 @endsection
 
 @section('store')
-  <form method="post" action="{{ route('show.store') }}">
+  <form method="post" action="{{ route('store') }}">
+   <input type='hidden' name='id' value='{{ $post->id }}'>
       {{ csrf_field() }} 
           <textarea name="comment" cols="30" rows="5" value=""></textarea>
       <input type="submit" name="submit" value="投稿">

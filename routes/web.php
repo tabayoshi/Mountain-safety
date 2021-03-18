@@ -33,13 +33,6 @@ Route::get('show_mountain/{mt}', 'ShowMontainController@showMontain')->name('sho
 
 // 投稿の詳細画面
 Route::get('show/{id}', 'ShowController@show')->name('show');
-// Route::post('show', 'ShowController@store')->name('store');
-// Route::resource('show', 'ShowController', ['only' => [
-//     'show',
-//     'time',
-//     'store'
-// ]]);
+Route::get('show/{mt}', 'ShowController@people')->name('people');
+Route::post('show', 'ShowController@store')->name('store');
 
-Route::resource('show', ShowController::class)->only([
-    'store'
-]);

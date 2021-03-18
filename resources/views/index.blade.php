@@ -73,7 +73,7 @@
 <a href="{{route('post.create')}}">投稿ページ</a>
 <h2>投稿記事一覧</h2>
   @foreach($posts as $post)
-    <a href="http://localhost:8888/public/show?id={{$post->id}}"><h3>{{$post->title}}：{{$post->created_at}}</h3></a>
+    <a href="{{ route('show',$post->id) }}"><h3>{{$post->title}}：{{$post->created_at}}</h3></a>
   @endforeach
   @if (session('flash_message')) 
     <div class="flash_message">
