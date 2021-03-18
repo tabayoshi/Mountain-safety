@@ -8,7 +8,7 @@ body{
 p{
 	margin: 0;
 }
-.cp_iptxt {
+.cp_iptxt{
 	position: relative;
 	width: 80%;
 	margin: 10px;
@@ -52,8 +52,6 @@ p{
 }
 .ef:focus {
 	border: 1px solid #da3c41;
-}
-.ef:focus ~ .focus_bg, .cp_iptxt.ef ~ .focus_bg {
 	width: 100%;
 	background-color: rgba(218,60,65,.3);
 }
@@ -63,6 +61,7 @@ p{
 	position: relative;
 	padding: 7px 12px;
 	border: 0;
+	width: 80%;
 	border: 1px solid #1b2538;
 	background: transparent;
 }

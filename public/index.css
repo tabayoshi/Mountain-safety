@@ -1,0 +1,52 @@
+main{
+    margin: 0px 100px;
+}
+.post{
+  height: 210px;
+}
+a:hover { 
+  text-decoration:none;
+}
+.post_page{
+  color:  rgba(0,0,0,.5);
+  padding: 8px;
+}
+.post_page:hover { 
+  color: rgba(0,0,0);
+}
+.search_container input[type="text"]{
+    border: none;
+    height: 1.8em;
+}
+.search_container input[type="text"]:focus {
+    outline: 0;
+}
+.search_container{
+    position: relative;
+    border: 2px solid #3879D9;
+    padding: 1px 0px 0px 5px;
+    border-radius: 20px;
+    width: 265px;
+    overflow: hidden;
+    border-right-width: 0px;
+}
+.search_container button[type="submit"]{
+    cursor: pointer;
+    font-family: FontAwesome;
+    border: none;
+    background: #3879D9;
+    color: #fff;
+    position: absolute;
+    width: 3.5em;
+    height: 3.1em;
+    right:0px;
+    top: -5px;
+    outline : none;
+    padding: 0px 6px 1px 6px;
+}
+  .search_container ::-webkit-input-placeholder {
+    color: #3879D9;
+}
+input:-webkit-autofill {
+    box-shadow: 0 0 0px 1000px white inset;
+}
