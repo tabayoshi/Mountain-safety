@@ -16,11 +16,12 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
+        'id',
         'name',
         'email',
         'password',
         'address',
-        'tel',
+        'tel'
     ];
 
     /**
@@ -40,6 +41,12 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function getDtata()
+    {
+        return $this->id . ':' . $this->name; //データの内容をテキストで返す
+    }
+
     public function comments()
     {
         return $this->hasMany(Comment::class);
@@ -47,5 +54,9 @@ class User extends Authenticatable
     public function posts()
     {
         return $this->hasMany(Post::class);
+    }
+    public function users()
+    {
+        return $this->hasMany(User::class);
     }
 }

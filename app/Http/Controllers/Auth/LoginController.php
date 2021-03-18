@@ -44,7 +44,7 @@ class LoginController extends Controller
     public function authenticated()
     {
         $posts = Post::all();
-      $mountains = Mountain::orderBy('id', 'desc')->paginate(15);
-    return view('index', compact('posts','mountains'));
+        $mountains = Mountain::orderBy('id', 'desc')->paginate(15);
+        return view('index', compact('posts','mountains'));
     }
 }

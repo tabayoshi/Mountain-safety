@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use App\Post;
 use App\Comment;
 use Carbon\Carbon;
@@ -9,45 +10,41 @@ use Illuminate\Http\Request;
 
 class ShowController extends Controller
 {
+// 投稿表示/コメント表示
     public function show(Request $request)
     {
-    // 現在時間取得
-        $cb = new Carbon();
-        echo $cb;
-        echo '<br>';
+        $posts = Post::where('id',$request->id)->get(); // 投稿記事表示
+        User::with('posts:user_id')->get(['name']); // リレーション：名前の取得
+        
+        $comments = Comment::where('post_id',$request->id)->get(); // コメント表示
+        User::with('comments:user_id')->get(['name']); // リレーション：名前の取得
 
-    // 下山アラート時間
-    // 現時刻-下山時間=2時間以上
-        $down = new Carbon();
-        $down->subHour(2);
-        echo $down;
-        echo '<br>';
+// 時間取得/今登ってる人・過去に登った人
+        // 今登ってる人 過去に登った人
+        $people = Post::where('mountain_id', $request->id)->get();
+                // echo $people;
 
-    // 遭難アラート時間
-    // 現時刻-下山時間=2時間以上
-        $distress = new Carbon();
-        $distress->subHour(4);
-        echo $distress;
-        echo '<br>';
+        // $people = Post::pluck('mountain_id', 'id');
+        // $people = User::with('posts:user_id')->get(['name']);
+        // echo $people;
+        // $person = Post::where('id', $request->id)->get();
+        // foreach ($people as $person) {
+        // }
+        // dd($peron);
+        
+        $today = Carbon::now();; // 現在時間取得
+        // dd($today);
+        
+        $down = new Carbon(); // 下山アラート時間(現時刻-下山時間＝２時間以上)
+        $down->addHour(2);
+        // dd($down);
+         
+        $distress = new Carbon(); // 遭難アラート時間(現時刻-下山時間＝４時間以上)
+        $distress->addHour(4);
+        // dd($distress);
 
-        $param = ['id' => $request->id];
-
-    // 投稿記事表示
-        $posts = Post::where('id',$param)->get();
-    
-    // リレーション:名前の取得
-        $users_p = User::with('posts:user_id')->get(['name']);
-
-    // コメント表示
-        $comments = Comment::where('post_id',$param)->get();
-        echo '<br>';
-    // リレーション:名前の取得
-        $users_c = User::with('comments:user_id')->get(['name']);
-
-    // 今登ってる人　過去に登った人
-        $times = Post::where('mountain_id', $param)->get(['user_id', 'mountain_id', 'downhill_time']);
-        echo $times;
-        echo '<br>';
+        
+        
 
         // $posts = Post::all();
         // $users = [];
@@ -62,35 +59,37 @@ class ShowController extends Controller
         // echo $unique;
         // echo '<br>';
 
-        return view('/show',
+        return view('show', 
+        // compact('today', 'down', 'distress', 'people')); 
         [
-            'posts' => $posts,
-            'comments' => $comments,
-            'cb' => $cb,
-            'down' => $down,
-            'distress' => $distress,
+        'posts' => $posts,
+        'comments' => $comments,
+        'people' => $people,
+        // 'person' => $person,
+        'today' => $today,
+        'down' => $down,
+        'distress' => $distress,
         ]);
     }
 
-    // コメント投稿
+// コメント投稿
     public function store(Request $request) {
         $this->validate(
-            $request,
-            [
-                'comment' => 'required|string',
+            $request,[
+                'comment' => 'required|string'
             ],
             [
                 'comment.required' => 'コメントは必須です。',
-                'comment.string' => 'コメントには文字列を入力してください。',
+                'comment.string' => 'コメントには文字列を入力してください。'
             ]
         );
 
-        $comment = new Comment;
-        $comment->user_id = 1;
-        $comment->post_id = $request->id;
-        $comment->comment = $request->comment;
-        $comment->save();
-        // dd($comment);
+            $comment = new Comment;
+            $comment->user_id = 1; //$request->user_idに変更する
+            $comment->post_id = 4; //$request->post_id?に変更する
+            $comment->comment = $request->comment;
+            $comment->save();
+            // dd($comment);
         return redirect()->back();
     }
 }
