@@ -22,7 +22,7 @@ class Mountain extends Model
 
     public function post()
     {
-        return $this->hasMeny(Post::class);
+        return $this->hasOne(Post::class);
     }
 
     // ------------------------------------------------------

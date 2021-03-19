@@ -37,7 +37,7 @@ class ShowController extends Controller
         $search_result = '一致する検索結果はありませんでした。';
       };
 
-        // $person = Post::where('id', $request->id)->get();
+        $person = Post::where('id', $request->id)->get();
         // dd($person);
         // 今登ってる人 過去に登った人
         // $people = Post::where('id', $request->id)->get();
@@ -85,7 +85,7 @@ class ShowController extends Controller
         'posts' => $posts,
         'comments' => $comments,
         'people' => $people,
-        // 'person' => $person,
+        'person' => $person,
         'today' => $today,
         'down' => $down,
         'distress' => $distress,
@@ -114,8 +114,7 @@ class ShowController extends Controller
     public function people(Mountain $mt)
     {
         $user = $mt->post();
-        dd($user);
-        return view('show', compact('post','mt'));
+        return view('show', compact('user_id', 'mt'));
     }
 }
 

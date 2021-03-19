@@ -4,48 +4,97 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('header')</title>
+    <title>
+        @foreach($posts as $post)
+            投稿の詳細：{{ $post->user->name }}
+        @endforeach
+    </title>
     <style>
     .alert {
         font-size: 20px;
         color: #fff;
         background: red;
         display: inline-block;
-
     }
+    
     </style>
   </head>
   <body>
     <header>
-      <h1>@yield('header')</h1>
+      <h1>
+      @foreach($posts as $post)
+            投稿の詳細：{{ $post->user->name }}
+        @endforeach
+        </h1>
     </header>
 
     <section class="post">
-      @yield('alert')
-      @yield('post')
+      <!-- <p>今：{{$today->format('Y/m/d H:i')}}</p> -->
+      <!-- <p>下山時間：{{$person->downhill_time}}</p> -->
+      @if($distress->gte($person->downhill_time))
+        <h1 class="alert">遭難アラート：遭難の可能性があります</h1>
+      @elseif(!$down->gte($person->downhill_time))
+        <h1 class="alert">下山アラート：下山ボタンが押されていません。下山ボタンを押してください</h1>
+      @endif
+
+      <div style="color:red"> <!-- 投稿内容表示 -->
+        @foreach($posts as $post)
+          <h3 >{{$post->id}}{{$post->title}}</h3> <!-- <p>タイトル</p> -->
+          <p>{{$post->article}}：{{$post->created_at->format('Y/m/d H:i')}}</p> 
+        @endforeach
+      </div>
       <button>下山ボタン</button>
       <hr>
     </section>
 
     <section class="comment">
-    <h2>コメント</h2>
+      <h2>コメント</h2>
       @include('common.validation')
-      @yield('store')
-      @yield('comment')
+      <form method="post" action="{{ route('store') }}">
+        <input type='hidden' name='id' value='{{ $post->id }}'>
+        {{ csrf_field() }} 
+        <textarea name="comment" cols="30" rows="5" value=""></textarea>
+        <input type="submit" name="submit" value="投稿">
+      </form>
+      <div style="color:blue">
+        <ul>
+          @foreach($comments as $comment)
+            <li><p>{{$comment->comment}}：{{ $comment->user->name }}</p></li>           
+          @endforeach
+        </ul>
+      </div>
+      <hr>
     </section>
 
     <section class="now">
-    <h3>今登ってる人</h3>
-      @yield('now')
+      <h3>今登ってる人</h3>
+      <div style="color:orange">
+        @foreach($people as $person)
+          @if("")
+            <!-- <p>今登ってる人はいません</p> -->
+          @elseif($today->eq($person))
+            {{$person->user->name}}
+          @else
+            <p>今登ってる人はいません</p>
+          @endif
+        @endforeach
+      </div>
     </section>
 
     <section class="past">
-    <h3>過去に登った人</h3>
-      @yield('past')
+      <h3>過去に登った人</h3>
+      <div style="color:orange">
+        @foreach($people as $person)
+        @if(!$today->gt($person))
+          {{$person->user->name}}
+        @else
+          <p>まだ誰も登っていません</p>         
+        @endif
+        @endforeach
+      </div>
+      <hr>
+      <a href="{{ route('index') }}">戻る</a>
     </section>
-    <hr>
-
-    <a href="{{ route('index') }}">戻る</a>
   </body>
 
 
