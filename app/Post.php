@@ -15,7 +15,6 @@ class Post extends Model
         'mountain_id',
         'user_id'
     ];
-
     public function comments()
     {
         return $this->hasMany(Comment::class);
@@ -28,7 +27,6 @@ class Post extends Model
     {
         return $this->belongsTo(Prefecture::class);
     }
-
     public function mountain()
     {
         return $this->belongsTo(Mountain::class);
