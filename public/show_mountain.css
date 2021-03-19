@@ -1,3 +1,21 @@
-body{
-    padding: 100px;
+.top{
+    margin: 0px 100px 50px 100px;
+}
+a{
+    color: #000;
+}
+a:hover { 
+    text-decoration: none;
+    color: #999;
+}
+.auth-link{
+    color: #000;
+    padding: 8px;
+}
+.post_page{
+    padding-right: 15px;
+    padding: 8px;
+}
+.name{
+    margin-bottom: 30px;
 }

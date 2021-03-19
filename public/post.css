@@ -1,12 +1,30 @@
-body{
+main{
 	margin: 0px 100px;
 }
 .error{
     color:red;
 	margin-left: 40px;
 }
+.navbar{
+	height: 60px;
+}
 p{
 	margin: 0;
+}
+a{
+	color: #000;
+}
+a:hover { 
+	text-decoration: none;
+	color: #999;
+}
+.auth-link{
+	color: #000;
+	padding: 8px;
+}
+.post_page{
+	padding-right: 15px;
+	padding: 8px;
 }
 .cp_iptxt{
 	position: relative;

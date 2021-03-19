@@ -9,12 +9,12 @@ use App\Mountain;
 class IndexController extends Controller
 {
     public function index() {
-      $posts = Post::orderBy('id', 'desc')->paginate(5, ["*"], 'posts');
+      $posts = Post::orderBy('id', 'desc')->paginate(6, ["*"], 'posts');
       $mountains = Mountain::paginate(15, ["*"], 'mountains');
       return view('index', compact('posts','mountains'));
     }
     public function search(Request $request) {
-      $posts = Post::orderBy('id', 'desc')->paginate(5, ["*"], 'posts');
+      $posts = Post::orderBy('id', 'desc')->paginate(6, ["*"], 'posts');
       if(isset($request->search)){
         // 検索されたら表示
         $search = Mountain::where('mountain_name', 'like', "%$request->search%")->get();
