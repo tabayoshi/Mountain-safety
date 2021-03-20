@@ -6,6 +6,7 @@ use App\Post;
 use Illuminate\Http\Request;
 use App\Mountain;
 
+
 class IndexController extends Controller
 {
     public function index() {

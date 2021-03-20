@@ -19,3 +19,6 @@ a:hover {
 .name{
     margin-bottom: 30px;
 }
+_:lang(x)::-ms-,main{
+    margin: 0px 50px;
+}
