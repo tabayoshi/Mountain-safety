@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Auth;
 Auth::routes();
 
 Route::get('/', 'IndexController@index')->name('index');
-Route::post('/search', 'IndexController@search')->name('search');
+Route::get('/search', 'IndexController@search')->name('search');
 //ログインしていないとログインページに飛ぶ
 Route::group(['middleware' => ['auth']], function(){
     //投稿画面と処理のルート
@@ -33,9 +33,5 @@ Route::get('show_mountain/{mt}', 'ShowMontainController@showMontain')->name('sho
 
 // 投稿の詳細画面
 Route::get('show/{id}', 'ShowController@show')->name('show');
-Route::get('show/{mt}', 'ShowController@people')->name('people');
-//----------------------------------------------------------------
-// Route::get('show/{mt}', 'ShowController@people')->name('people');
-//----------------------------------------------------------------
 Route::post('show', 'ShowController@store')->name('store');
 

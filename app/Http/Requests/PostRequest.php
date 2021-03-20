@@ -37,9 +37,9 @@ class PostRequest extends FormRequest
         return [
             'title.required' => 'タイトルは必須項目です',
             'title.max' => 'タイトルは30文字以下にしてください',
-            'article' => '記事は必須項目です',
-            'climbing_time' => '登山日は必須項目です',
-            'downhill_time' => '下山時間は必須項目です',
+            'article.required' => '記事は必須項目です',
+            'climbing_time.required' => '登山日は必須項目です',
+            'downhill_time.required' => '下山時間は必須項目です',
             'mountain_id.not_in' => '登山する山は必須項目です',
         ];
     }

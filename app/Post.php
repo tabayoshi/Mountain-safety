@@ -16,7 +16,7 @@ class Post extends Model
         'user_id'
     ];
 
-    public function comment()
+    public function comments()
     {
         return $this->hasMany(Comment::class);
     }
@@ -30,7 +30,6 @@ class Post extends Model
     {
         return $this->belongsTo(Prefecture::class);
     }
-
     public function mountain()
     {
         return $this->belongsTo(Mountain::class);

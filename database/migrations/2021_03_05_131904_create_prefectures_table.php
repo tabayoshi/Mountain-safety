@@ -16,7 +16,7 @@ class CreatePrefecturesTable extends Migration
         Schema::create('prefectures', function (Blueprint $table) {
             $table->id();
             $table->foreignId('mountain_id');
-            $table->string('prefecture_name', 5);
+            $table->string('prefecture_name', 255);
             $table->timestamps();
         });
     }
