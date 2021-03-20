@@ -114,6 +114,7 @@ class ShowController extends Controller
     public function people(Mountain $mt)
     {
         $user = $mt->post();
+        dd($user);
         return view('show', compact('user_id', 'mt'));
     }
 }

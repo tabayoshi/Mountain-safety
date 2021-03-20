@@ -69,28 +69,27 @@
     <section class="now">
       <h3>今登ってる人</h3>
       <div style="color:orange">
+          @if($today->eq($person))
         @foreach($people as $person)
-          @if("")
             <!-- <p>今登ってる人はいません</p> -->
-          @elseif($today->eq($person))
             {{$person->user->name}}
+        @endforeach
           @else
             <p>今登ってる人はいません</p>
           @endif
-        @endforeach
       </div>
     </section>
 
     <section class="past">
       <h3>過去に登った人</h3>
       <div style="color:orange">
-        @foreach($people as $person)
         @if(!$today->gt($person))
-          {{$person->user->name}}
+          @foreach($people as $person)
+            {{$person->user->name}}
+          @endforeach
         @else
           <p>まだ誰も登っていません</p>         
         @endif
-        @endforeach
       </div>
       <hr>
       <a href="{{ route('index') }}">戻る</a>

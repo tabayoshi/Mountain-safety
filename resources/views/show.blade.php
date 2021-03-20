@@ -42,15 +42,14 @@
 
 @section('now')
   <div style="color:orange">
-  @foreach($people as $person)
-    @if("")
+    @if($today->eq($person))
+      @foreach($people as $person)
+        {{$person->user->name}}
+      @endforeach
       <!-- <p>今登ってる人はいません</p> -->
-    @elseif($today->eq($person))
-      {{$person->user->name}}
     @else
       <p>今登ってる人はいません</p>
     @endif
-  @endforeach
   </div>
 @endsection
 
@@ -58,13 +57,13 @@
 
 @section('past')
   <div style="color:orange">
-  @foreach($people as $person)
     @if(!$today->gt($person))
+  @foreach($people as $person)
       {{$person->user->name}}
+  @endforeach
     @else
       <p>まだ誰も登っていません</p>         
     @endif
-  @endforeach
     <!-- 過去に登った人 --> <!-- 日付で判断する-->  <!-- 下山日付よりも大きい日付 -->
     <!-- @foreach($posts as $time) 
         <p>{{ $post->user->name }}(ユーザー{{$post->user_id}})</p>         
