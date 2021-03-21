@@ -16,6 +16,7 @@ class ShowController extends Controller
     public function show(Request $request)
     {
         $posts = Post::where('id',$request->id)->get(); // 投稿記事表示
+        // dd($posts);
         User::with('posts:user_id')->get(['name']); // リレーション：名前の取得
         
         $comments = Comment::where('post_id',$request->id)->get(); // コメント表示
@@ -44,8 +45,6 @@ class ShowController extends Controller
         $people = post::whereIn('mountain_id', $people)->get();
         // dd($people);
 
-        $flag = post::find($request->id,['alert_flag']);
-        // dd($flag);
 
         return view('show', 
         [
@@ -79,10 +78,9 @@ class ShowController extends Controller
     }
 
 //アラート消去(フラグ)
-    public function flag(Request $request) {
-        $flag = post::find($request->id,['alert_flag']);
-        dd($flag);
-    return redirect()->back();
+    public function update(Request $request) {
+        Post::where('id', $request->id)->update(['alert_flag' => $request->alert_flag]);
+     return redirect()->back();
     }
 }
 

@@ -36,4 +36,4 @@ Route::get('show/{id}', 'ShowController@show')->name('show');
 Route::post('show', 'ShowController@store')->name('store');
 
 //下山フラグ
-// Route::post('show', 'ShowController@flag')->name('flag');
+// Route::post('show', 'ShowController@update')->name('update');

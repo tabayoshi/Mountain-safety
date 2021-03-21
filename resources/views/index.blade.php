@@ -27,7 +27,7 @@
             <h3>みんなで登山ライフをエンジョイしよう</h3>
             <div class="post">
              @foreach($posts as $post)
-             <a href="{{ route('show',$post->id) }}}}"><h3>{{$post->title}}：{{$post->created_at}}</h3></a>
+             <a href="{{ route('show',$post->id) }}"><h3>{{$post->title}}：{{$post->created_at}}</h3></a>
              @endforeach
             </div>
             {{ $posts->appends(request()->input())->links() }}

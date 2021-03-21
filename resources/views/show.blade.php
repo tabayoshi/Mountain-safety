@@ -17,6 +17,14 @@
           display: inline-block;
           padding: 0 10px;
       }
+
+      .down {
+        font-size: 20px;
+          color: #fff;
+          background: #00FF00;
+          display: inline-block;
+          padding: 0 10px;
+      }
     </style>
   </head>
   <body>
@@ -29,10 +37,12 @@
     </header>
 
     <section class="post">
-      <p>今：{{$today->format('Y/m/d H:i')}}</p>
+      <!-- <p>今：{{$today->format('Y/m/d H:i')}}</p> -->
       
       @foreach($times as $time)
-        @if($distress->gte($time->downhill_time))
+        @if(($post->alert_flag) === 0)
+          <h1 class="down">下山しました</h1>
+        @elseif($distress->gte($time->downhill_time))
           <h1 class="alert">遭難アラート：遭難の可能性があります</h1>
         @elseif($down->gte($time->downhill_time))
           <h1 class="alert">下山アラート：下山ボタンが押されていません。下山ボタンを押してください</h1>
@@ -46,7 +56,8 @@
           <p>下山時間：{{$post->downhill_time}}</p>
         @endforeach
       </div>
-      <form method="post" action="">
+      <form method="post" action="{{ route('update') }}">
+      {{ csrf_field() }} 
         <input type="hidden" name="alert_flag" value="0">
         <input type="submit" value="下山ボタン">
       <!-- <button>下山ボタン</button> -->
