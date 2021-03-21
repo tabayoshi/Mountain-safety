@@ -15,6 +15,7 @@
           color: #fff;
           background: red;
           display: inline-block;
+          padding: 0 10px;
       }
     </style>
   </head>
@@ -30,15 +31,26 @@
     <section class="post">
       <p>今：{{$today->format('Y/m/d H:i')}}</p>
       
-            
-        
+      @foreach($times as $time)
+        @if($distress->gte($time->downhill_time))
+          <h1 class="alert">遭難アラート：遭難の可能性があります</h1>
+        @elseif($down->gte($time->downhill_time))
+          <h1 class="alert">下山アラート：下山ボタンが押されていません。下山ボタンを押してください</h1>
+        @endif
+      @endforeach
+
       <div> <!-- 投稿内容表示 -->
         @foreach($posts as $post)
           <h3 >{{$post->id}}．{{$post->title}}</h3>
-          <p>{{$post->article}}：{{$post->created_at->format('Y/m/d H:i')}}</p> 
+          <p>{{$post->article}}</p> 
+          <p>下山時間：{{$post->downhill_time}}</p>
         @endforeach
       </div>
-      <button>下山ボタン</button>
+      <form method="post" action="">
+        <input type="hidden" name="alert_flag" value="0">
+        <input type="submit" value="下山ボタン">
+      <!-- <button>下山ボタン</button> -->
+      </form>
       <hr>
     </section>
 

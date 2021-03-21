@@ -24,20 +24,29 @@ class ShowController extends Controller
         
 // 下山アート・遭難アラート //---------------------------------------------------------
         $today = Carbon::now();; // 現在時間取得
+        // echo $today;
+        // echo '<br>';
         $times = Post::where('id',$request->id)->get(); 
         // dd($times);
-
         $down = new Carbon(); // 下山アラート時間(現時刻-下山時間＝２時間以上)
         $down->addHour(2);
+        // echo $down;
+        // echo '<br>';
+        // dd($down);
         $distress = new Carbon(); // 遭難アラート時間(現時刻-下山時間＝４時間以上)
         $distress->addHour(4);
+        // echo $distress;
+        // dd($distress);
         // -------------------------------------------------------------------------------------
         
-        // 今登ってる人・過去に登った人 --------------------------------------------------------
-        
+// 今登ってる人・過去に登った人 --------------------------------------------------------
         $people = post::find($request->id,['mountain_id']);
         $people = post::whereIn('mountain_id', $people)->get();
-        
+        // dd($people);
+
+        $flag = post::find($request->id,['alert_flag']);
+        // dd($flag);
+
         return view('show', 
         [
         'posts' => $posts,
@@ -67,6 +76,13 @@ class ShowController extends Controller
             $comment->comment = $request->comment;
             $comment->save();
         return redirect()->back();
+    }
+
+//アラート消去(フラグ)
+    public function flag(Request $request) {
+        $flag = post::find($request->id,['alert_flag']);
+        dd($flag);
+    return redirect()->back();
     }
 }
 
