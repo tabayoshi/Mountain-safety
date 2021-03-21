@@ -79,7 +79,7 @@ class ShowController extends Controller
 
 //アラート消去(フラグ)
     public function update(Request $request) {
-        Post::where('id', $request->id)->update(['alert_flag' => $request->alert_flag]);
+       $flag =  Post::where('id', $request->id)->update(['alert_flag' => $request->alert_flag]);
      return redirect()->back();
     }
 }

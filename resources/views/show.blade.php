@@ -7,7 +7,6 @@
       @foreach($posts as $post)
         投稿の詳細：{{ $post->user->name }}
       @endforeach
-
     </title>
     <style>
       .alert {
@@ -26,8 +25,12 @@
           padding: 0 10px;
       }
     </style>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css" integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu" crossorigin="anonymous">
+  <link rel="stylesheet" href="{{ asset('/index.css') }}">
   </head>
   <body>
+  @include('header')
     <header>
       <h1>
         @foreach($posts as $post)
@@ -37,8 +40,6 @@
     </header>
 
     <section class="post">
-      <!-- <p>今：{{$today->format('Y/m/d H:i')}}</p> -->
-      
       @foreach($times as $time)
         @if(($post->alert_flag) === 0)
           <h1 class="down">下山しました</h1>
@@ -57,6 +58,8 @@
         @endforeach
       </div>
       <form method="post" action="{{ route('update') }}">
+        <input type="hidden" name="id" value="{{$post->id}}">
+      @method('PATCH')
       {{ csrf_field() }} 
         <input type="hidden" name="alert_flag" value="0">
         <input type="submit" value="下山ボタン">

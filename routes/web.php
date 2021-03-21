@@ -33,7 +33,5 @@ Route::get('show_mountain/{mt}', 'ShowMontainController@showMontain')->name('sho
 
 // 投稿の詳細画面
 Route::get('show/{id}', 'ShowController@show')->name('show');
+Route::patch('update', 'ShowController@update')->name('update');
 Route::post('show', 'ShowController@store')->name('store');
-
-//下山フラグ
-// Route::post('show', 'ShowController@update')->name('update');

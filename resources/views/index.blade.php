@@ -24,15 +24,23 @@
             @endif
             @yield('content')
             <h1>登録一覧</h1>
-            <h3>みんなで登山ライフをエンジョイしよう</h3>
+            <h3 class="article-top">みんなで登山ライフをエンジョイしよう</h3>
             <div class="post">
              @foreach($posts as $post)
-             <a href="{{ route('show',$post->id) }}"><h3>{{$post->title}}：{{$post->created_at}}</h3></a>
+             <div class="inline-block">
+                 <a href="{{ route('show',$post->id) }}">
+                  <h3>{{Str::limit($post->title,10,'...')}}</h3> 
+                  <span>
+                    登山日:{{Str::limit($post->climbing_time,10,'')}}
+                  </span> 
+                 </a>
+             </div>
              @endforeach
             </div>
-            {{ $posts->appends(request()->input())->links() }}
+            <div class="pageing-top">
+              {{ $posts->appends(request()->input())->links() }}
+            </div>
          </div>
-         <hr>
          <div class="photo">
           <h3 class="edge_search">行きたい山を探そう</h3>
            <form action="{{ route('search') }}" method="GET" class="search_container">
@@ -59,11 +67,13 @@
                 @empty($search_result)
                 <h1 class="mt_all">山名一覧</h1>
                     @foreach($mountains as $mountain)
-                        <div class="mt_details">
-                         <a href="{{ route('show_mountain',$mountain->id) }}">{{ $mountain->mountain_name }}</a>
+                        <div class="mt_details inline-block">
+                          <a href="{{ route('show_mountain',$mountain->id) }}">{{ $mountain->mountain_name }}</a>
                         </div>
                     @endforeach
-                {{ $mountains->appends(request()->input())->links() }}
+                   <div class="pageing">
+                        {{ $mountains->appends(request()->input())->links() }}
+                   </div>    
                 @endempty
         </div>
     </main>
