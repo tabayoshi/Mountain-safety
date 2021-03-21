@@ -32,6 +32,6 @@ Route::group(['middleware' => ['auth']], function(){
 Route::get('show_mountain/{mt}', 'ShowMontainController@showMontain')->name('show_mountain');
 
 // 投稿の詳細画面
-Route::get('show/{id}', 'ShowController@show')->name('show');
+Route::get('show/{id}', 'ShowController@show')->name('show')->middleware('auth');
 Route::patch('update', 'ShowController@update')->name('update');
 Route::post('show', 'ShowController@store')->name('store');

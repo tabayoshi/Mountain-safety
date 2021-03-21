@@ -7,7 +7,6 @@ body{
 }
 .article-top{
   margin-bottom: 30px;
-  
 }
 .bottom{
   margin: 0px 100px;
@@ -104,6 +103,7 @@ input:-webkit-autofill {
   text-shadow: rgb(0 0 0 / 20%);
   margin-bottom: 10px;
   color: #000;
+  font-family: system-ui;
 }
 .bottom{
   margin-top: 50px;
