@@ -1,82 +1,117 @@
-@extends('layouts.app')
-
-@section('header')
-  @foreach($posts as $post)
-    投稿の詳細：{{ $post->user->name }}
-  @endforeach
-@endsection
-
-@section('post')
-<section>
-  <div style="color:red">
-    <!-- 投稿内容表示 -->
-    @foreach($posts as $post)
-      <!-- <p>タイトル</p> -->
-      <h3 >{{$post->title}}</h3>
-      <!-- <p>投稿内容</p> -->
-      <p>{{$post->article}}：{{$post->created_at->format('Y/m/d H:i')}}</p>
-    @endforeach
-  </div>
-  </section>
-@endsection
-
-@section('store')
-  <form method="post" action="{{ route('show.store') }}">
-      {{ csrf_field() }} 
-          <textarea name="comment" cols="30" rows="5" value=""></textarea>
-      <input type="submit" name="submit" value="投稿">
-  </form>
-@endsection
-
-@section('comment')
-  <div style="color:blue">
-    <ul>
-      @foreach($comments as $comment)
-        <li><p>{{$comment->comment}}：{{ $comment->user->name }}</p></li>           
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+      @foreach($posts as $post)
+        投稿の詳細：{{ $post->user->name }}
       @endforeach
-    </ul>
-  </div>
-  <hr>
-@endsection
+    </title>
+    <style>
+      .alert {
+          font-size: 20px;
+          color: #fff;
+          background: red;
+          display: inline-block;
+          padding: 0 10px;
+      }
 
-@section('now')
-  <div style="color:orange">
-  @foreach($people as $person)
-    @if("")
-      <!-- <p>今登ってる人はいません</p> -->
-    @elseif($today->eq($person))
-      {{$person->user->name}}
-    @else
-      <p>今登ってる人はいません</p>
-    @endif
-  @endforeach
-  </div>
-@endsection
+      .down {
+        font-size: 20px;
+          color: #fff;
+          background: #00FF00;
+          display: inline-block;
+          padding: 0 10px;
+      }
+    </style>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css" integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu" crossorigin="anonymous">
+  <link rel="stylesheet" href="{{ asset('/index.css') }}">
+  </head>
+  <body>
+  @include('header')
+    <header>
+      <h1>
+        @foreach($posts as $post)
+            投稿の詳細：{{ $post->user->name }}
+        @endforeach
+        </h1>
+    </header>
 
-    <!-- 今登ってる人 --> <!-- 日付で判断する--> <!-- 下山日付と同じ日付 -->       
+    <section class="post">
+      @foreach($times as $time)
+        @if(($post->alert_flag) === 0)
+          <h1 class="down">下山しました</h1>
+        @elseif($distress->gte($time->downhill_time))
+          <h1 class="alert">遭難アラート：遭難の可能性があります</h1>
+        @elseif($down->gte($time->downhill_time))
+          <h1 class="alert">下山アラート：下山ボタンが押されていません。下山ボタンを押してください</h1>
+        @endif
+      @endforeach
 
-@section('past')
-  <div style="color:orange">
-  @foreach($people as $person)
-    @if(!$today->gt($person))
-      {{$person->user->name}}
-    @else
-      <p>まだ誰も登っていません</p>         
-    @endif
-  @endforeach
-    <!-- 過去に登った人 --> <!-- 日付で判断する-->  <!-- 下山日付よりも大きい日付 -->
-    <!-- @foreach($posts as $time) 
-        <p>{{ $post->user->name }}(ユーザー{{$post->user_id}})</p>         
-     @endforeach -->
-  </div>
-@endsection
+      <div> <!-- 投稿内容表示 -->
+        @foreach($posts as $post)
+          <h3 >{{$post->id}}．{{$post->title}}</h3>
+          <p>{{$post->article}}</p> 
+          <p>下山時間：{{$post->downhill_time}}</p>
+        @endforeach
+      </div>
+      <form method="post" action="{{ route('update') }}">
+        <input type="hidden" name="id" value="{{$post->id}}">
+      @method('PATCH')
+      {{ csrf_field() }} 
+        <input type="hidden" name="alert_flag" value="0">
+        <input type="submit" value="下山ボタン">
+      <!-- <button>下山ボタン</button> -->
+      </form>
+      <hr>
+    </section>
 
-@section('alert')
-    <p>今：{{$today->format('Y/m/d H:i')}}</p>
-    <p>下山時間：{{$person->downhill_time}}</p>
-    @if($distress->gte($person->downhill_time))
-      <h1 class="alert">遭難アラート：遭難の可能性があります</h1>
-    @elseif(!$down->gte($person->downhill_time))
-      <h1 class="alert">下山アラート：下山ボタンが押されていません。下山ボタンを押してください</h1>
-    @endif
-@endsection
+    <section class="comment">
+      <h2>コメント</h2>
+      @include('common.validation')
+      <form method="post" action="{{ route('store') }}">
+        <input type='hidden' name='id' value='{{ $post->id }}'>
+        {{ csrf_field() }} 
+        <textarea name="comment" cols="30" rows="5" value=""></textarea>
+        <input type="submit" name="submit" value="投稿">
+      </form>
+      <div>
+        <ul>
+          @foreach($comments as $comment)
+            <li><p>{{$comment->comment}}：{{ $comment->user->name }}</p></li>           
+          @endforeach
+        </ul>
+      </div>
+      <hr>
+    </section>
+
+    <section class="now">
+      <h3>今登ってる人</h3>
+      <div>
+        @if($today->eq($people))
+          @foreach($people->unique("user_id") as $person)
+              {{$person->user->name}}
+          @endforeach
+        @else
+          <p>今登ってる人はいません</p>
+        @endif
+      </div>
+    </section>
+
+    <section class="past">
+      <h3>過去に登った人</h3>
+      <div>
+        @if(!$today->gt($people))
+          @foreach($people->unique("user_id") as $person)
+            {{$person->user->name}}
+          @endforeach
+        @else
+          <p>まだ誰も登っていません</p>         
+        @endif
+      </div>
+      <hr>
+      <a href="{{ route('index') }}">戻る</a>
+    </section>
+  </body>

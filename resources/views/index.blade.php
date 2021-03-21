@@ -28,7 +28,7 @@
             <div class="post">
              @foreach($posts as $post)
              <div class="inline-block">
-                 <a href="http://localhost:8888/public/show?id={{$post->id}}">
+                 <a href="{{ route('show',$post->id) }}">
                   <h3>{{Str::limit($post->title,10,'...')}}</h3> 
                   <span>
                     登山日:{{Str::limit($post->climbing_time,10,'')}}

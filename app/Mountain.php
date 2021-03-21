@@ -14,7 +14,6 @@ class Mountain extends Model
         'elevation',
     ];
 
-
     public function prefectire()
     {
         return $this->hasOne(Prefecture::class);
@@ -22,7 +21,7 @@ class Mountain extends Model
 
     public function post()
     {
-        return $this->hasMeny(Post::class);
+        return $this->hasMany(Post::class);
     }
 
     // ------------------------------------------------------
